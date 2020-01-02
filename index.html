@@ -32,6 +32,9 @@
       background: #EEEEEE;
     }
 
+    input[type=number]{
+      width:5.75vw;
+    }
 
     button, input[type=button]{
       border-radius: 1vw;
@@ -65,7 +68,7 @@
 
 <body>
   <div style="position:absolute;width:15vw;padding:1vw;background: #EEEEEE;">
-    <form>
+
       <fieldset>
         <legend>Universal Options</legend>
         Stroke Color:
@@ -79,7 +82,7 @@
         <button onclick="setdimensions()">Update Dimensions</button>
         <button onclick="exportimage()">Export as 🖫</button>
       </fieldset>
-    </form>
+
   </div>
   <div style="position:absolute;width:15vw;padding:1vw;background:#EEEEEE;margin-top:45vh;">
 
@@ -101,12 +104,12 @@
     <div id="line-d" class="popup-frame" draggable="true">
       <form class="popupheader">
         <fieldset>
-          <legend>Rectangle</legend>
+          <legend>Line</legend>
           Point 1:<br>
-          <input type="number" id="line-xin" placeholder="X value"><br>
+          <input type="number" id="line-xin" placeholder="X value">
           <input type="number" id="line-yin" placeholder="Y value"><br>
           Point 2:<br>
-          <input type="number" id="line-linx" placeholder="X value"><br>
+          <input type="number" id="line-linx" placeholder="X value">
           <input type="number" id="line-liny" placeholder="Y value"><br>
           <input type="button" value="Draw" onclick="line()"><br>
           <input type="button" value="Cancel" onclick="document.getElementById('line-d').style.display = 'none'"><br>
@@ -165,7 +168,17 @@
   </div>
   <script src="PROGRAM.js"></script>
   <script src="export.js"></script>
-  <script src="draggable.js"></script>
   <script src="./renderer.js"></script>
+  <script src="jquery-1.12.4.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script>
+    $( function() {
+      $( ".popup-frame" ).draggable();
+    } );
+
+    $('.popup-frame').draggable({
+    cancel: 'Input'
+    });
+  </script>
 </body>
 </html>

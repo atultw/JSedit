@@ -30,7 +30,7 @@ function dragElement(elmnt) {
         console.log(elmnt.offsetTop)
         elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
     }
-
+    
     function closeDragElement() {
         document.onmouseup = null;
         document.onmousemove = null;
