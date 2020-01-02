@@ -11,124 +11,161 @@
   <link rel="stylesheet" href="https://use.typekit.net/mdf7hhr.css">
   <style>
     body{
-      font-family: interstate-mono,monospace;
+      font-family: forma-djr-micro,sans-serif;
       font-weight: 400;
       font-style: normal;
+      background:#6C7A89;
+      margin:0;
+      padding:0.5vw;
+    }
+
+    canvas{
+      background: #fff;
     }
 
     .popup-frame{
       display:none;
       padding:20px;
       border:1px solid black;
-      width:150px;
-      margin-top:100px;
+      width:15vw;
+      position:absolute;
+      background: #EEEEEE;
     }
 
 
     button, input[type=button]{
       border-radius: 1vw;
       background: linear-gradient(180deg, rgba(0,78,167,1) 0%, rgba(0,156,236,1) 100%);
-      font-family: interstate-mono,monospace;
+      font-family: forma-djr-micro,sans-serif;
       font-weight: 400;
       font-style: normal;
-      border:1px solid black;
       color: white;
       margin:5px;
       margin-left:0px;
+      border:1px solid black;
     }
 
     button:active, input[type=button]:active{
       border-radius: 1vw;
       background: linear-gradient(180deg, rgba(0,156,236,1) 0%, rgba(0,78,167,1) 100%);
-      font-family: interstate-mono,monospace;
+      font-family: forma-djr-micro,sans-serif;
       font-weight: 400;
       font-style: normal;
       border:1px solid black;
       color: white;
     }
+
+    input[type=color]{
+      width:2vw;
+      padding:0;
+      border:0;
+    }
   </style>
 </head>
 
 <body>
-  <div style="position:absolute;width:100px;">
-    Stroke Color:
-    <input type="color" id="stroke-color"><br>
-    Fill Color:
-    <input type="color" id="fill-color"><br>
-    <input style="width:100px" type="number" id="border-weight" placeholder="Line Thickness"><br>
-    Artboard Settings:
-    <input type="number" id="artboard-width" placeholder="Width">
-    <input type="number" id="artboard-height" placeholder="Height">
-    <button onclick="setdimensions()">Save 🖫 </button>
+  <div style="position:absolute;width:15vw;padding:1vw;background: #EEEEEE;">
+    <form>
+      <fieldset>
+        <legend>Universal Options</legend>
+        Stroke Color:
+        <input type="color" id="stroke-color"><br>
+        Fill Color:
+        <input type="color" id="fill-color"><br>
+        <input style="width:100px" type="number" id="border-weight" placeholder="Line Thickness"><br>
+        Artboard Settings:
+        <input type="number" id="artboard-width" placeholder="Width">
+        <input type="number" id="artboard-height" placeholder="Height">
+        <button onclick="setdimensions()">Update Dimensions</button>
+        <button onclick="exportimage()">Export as 🖫</button>
+      </fieldset>
+    </form>
   </div>
-  <canvas id="artboard" width="1000px" height="500px" style="border:1px solid black;position:absolute;margin-left:150px;">Your brower does not support HTML Canvas.</canvas>
+  <div style="position:absolute;width:15vw;padding:1vw;background:#EEEEEE;margin-top:45vh;">
+
+      <fieldset>
+        <legend>Tools</legend>
+        <button onclick="document.getElementById('line-d').style.display = 'inline-block'">➖ &nbsp Line</button><br>
+        <button onclick="document.getElementById('rect-d').style.display = 'inline-block'">🔲 &nbsp Rectangle</button><br>
+        <button onclick="document.getElementById('circle-d').style.display = 'inline-block'">⭕ &nbsp Circle</button><br>
+        <button onclick="document.getElementById('text-d').style.display = 'inline-block'">🔠 &nbsp Text</button><br>
+      </fieldset>
+
+  </div>
+  <canvas id="artboard" width="1000px" height="500px" style="border:1px solid black;position:absolute;margin-left:18vw;">Your brower does not support HTML Canvas.</canvas>
   <div style="float:right;position:absolute;margin-left:90vw;">
-    <button onclick="document.getElementById('line-d').style.display = 'inline-block'">Line / </button>
-    <button onclick="document.getElementById('rect-d').style.display = 'inline-block'">Rectangle ⃞ </button>
-    <button onclick="document.getElementById('circle-d').style.display = 'inline-block'">Circle ⃝</button>
-    <button onclick="document.getElementById('text-d').style.display = 'inline-block'">Text ␂ </button>
+
   </div>
   <br>
   <div id="hidden-area" style="display:block;margin-top:410px;">
-    <div id="line-d" class="popup-frame">
-      <form>
-        Line <br>
-        Point 1:<br>
-        <input type="number" id="line-xin" placeholder="X value"><br>
-        <input type="number" id="line-yin" placeholder="Y value"><br>
-        Point 2:<br>
-        <input type="number" id="line-linx" placeholder="X value"><br>
-        <input type="number" id="line-liny" placeholder="Y value"><br>
-        <input type="button" value="Draw" onclick="line()"><br>
-        <input type="button" value="Cancel" onclick="document.getElementById('line-d').style.display = 'none'"><br>
+    <div id="line-d" class="popup-frame" draggable="true">
+      <form class="popupheader">
+        <fieldset>
+          <legend>Rectangle</legend>
+          Point 1:<br>
+          <input type="number" id="line-xin" placeholder="X value"><br>
+          <input type="number" id="line-yin" placeholder="Y value"><br>
+          Point 2:<br>
+          <input type="number" id="line-linx" placeholder="X value"><br>
+          <input type="number" id="line-liny" placeholder="Y value"><br>
+          <input type="button" value="Draw" onclick="line()"><br>
+          <input type="button" value="Cancel" onclick="document.getElementById('line-d').style.display = 'none'"><br>
+        </fieldset>
       </form>
     </div>
-    <div id="rect-d" class="popup-frame">
-      <form>
-        Rectangle <br>
-        Point 1:<br>
-        <input type="number" id="rect-xin" placeholder="X value"><br>
-        <input type="number" id="rect-yin" placeholder="Y value"><br>
-        Point 2:<br>
-        <input type="number" id="rectx" placeholder="X value"><br>
-        <input type="number" id="recty" placeholder="Y value"><br>
-        <input type="button" value="Draw" onclick="rect()"><br>
-        <input type="button" value="Cancel" onclick="document.getElementById('rect-d').style.display = 'none'"><br>
+    <div id="rect-d" class="popup-frame" draggable="true">
+      <form class="popupheader">
+        <fieldset>
+          <legend>Rectangle</legend>
+          Point 1:<br>
+          <input type="number" id="rect-xin" placeholder="X value"><br>
+          <input type="number" id="rect-yin" placeholder="Y value"><br>
+          Point 2:<br>
+          <input type="number" id="rectx" placeholder="X value"><br>
+          <input type="number" id="recty" placeholder="Y value"><br>
+          <input type="button" value="Draw" onclick="rect()"><br>
+          <input type="button" value="Cancel" onclick="document.getElementById('rect-d').style.display = 'none'"><br>
+        </fieldset>
       </form>
     </div>
-    <div id="circle-d" class="popup-frame">
-      <form>
-        Ellipse <br>
-        <input type="number" id="circle-xin" placeholder="X value"><br>
-        <input type="number" id="circle-yin" placeholder="Y value"><br>
-        <input type="number" id="circle-radius" placeholder="Radius"><br>
+    <div id="circle-d" class="popup-frame" draggable="true">
+      <form class="popupheader">
+        <fieldset>
+          <legend>Ellipse</legend>
+          <input type="number" id="circle-xin" placeholder="X value"><br>
+          <input type="number" id="circle-yin" placeholder="Y value"><br>
+          <input type="number" id="circle-radius" placeholder="Radius"><br>
 
-        <input type="button" value="Draw" onclick="circle()"><br>
-        <input type="button" value="Cancel" onclick="document.getElementById('circle-d').style.display = 'none'"><br>
+          <input type="button" value="Draw" onclick="circle()"><br>
+          <input type="button" value="Cancel" onclick="document.getElementById('circle-d').style.display = 'none'"><br>
+        </fieldset>
       </form>
     </div>
-    <div id="text-d" class="popup-frame">
-      <form>
-        Text <br>
-        <input type="number" id="text-xin" placeholder="X value"><br>
-        <input type="number" id="text-yin" placeholder="Y value"><br>
-        <input type="number" id="text-size" placeholder="Text Size (px)"><br>
-        <input type="text" id="text-text" placeholder="Text String"><br>
-        <select id="text-font" name="selectFontFamily">
-          <option> Serif </option>
-          <option> Arial </option>
-          <option> Sans-Serif </option>
-          <option> Tahoma </option>
-          <option> Verdana </option>
-          <option> Lucida Sans Unicode </option>
-        </select>
-
-        <input type="button" value="Draw" onclick="text()"><br>
-        <input type="button" value="Cancel" onclick="document.getElementById('text-d').style.display = 'none'"><br>
+    <div id="text-d" class="popup-frame" draggable="true">
+      <form class="popupheader">
+        <fieldset>
+          <legend>Text</legend>
+          <input type="number" id="text-xin" placeholder="X value"><br>
+          <input type="number" id="text-yin" placeholder="Y value"><br>
+          <input type="number" id="text-size" placeholder="Text Size (px)"><br>
+          <input type="text" id="text-text" placeholder="Text String"><br>
+          <select id="text-font" name="selectFontFamily">
+            <option> Serif </option>
+            <option> Arial </option>
+            <option> Sans-Serif </option>
+            <option> Tahoma </option>
+            <option> Verdana </option>
+            <option> Lucida Sans Unicode </option>
+          </select>
+          <input type="button" value="Draw" onclick="text()"><br>
+          <input type="button" value="Cancel" onclick="document.getElementById('text-d').style.display = 'none'"><br>
+        </fieldset>
       </form>
     </div>
   </div>
   <script src="PROGRAM.js"></script>
+  <script src="export.js"></script>
+  <script src="draggable.js"></script>
   <script src="./renderer.js"></script>
 </body>
 </html>
