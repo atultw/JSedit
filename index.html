@@ -32,8 +32,9 @@
       background: #EEEEEE;
     }
 
-    input[type=number]{
-      width:5.75vw;
+    input[type=number], input[type=text], select{
+      width:5.25vw;
+      margin:0.25vw;
     }
 
     button, input[type=button]{
@@ -80,11 +81,11 @@
         <input type="number" id="artboard-width" placeholder="Width">
         <input type="number" id="artboard-height" placeholder="Height">
         <button onclick="setdimensions()">Update Dimensions</button>
-        <button onclick="exportimage()">Export as 🖫</button>
+        <button onclick="exportimage()">Export as 💾🖫</button>
       </fieldset>
 
   </div>
-  <div style="position:absolute;width:15vw;padding:1vw;background:#EEEEEE;margin-top:45vh;">
+  <div style="position:absolute;width:15vw;padding:1vw;background:#EEEEEE;margin-top:41vh;">
 
       <fieldset>
         <legend>Tools</legend>
@@ -95,7 +96,7 @@
       </fieldset>
 
   </div>
-  <canvas id="artboard" width="1000px" height="500px" style="border:1px solid black;position:absolute;margin-left:18vw;">Your brower does not support HTML Canvas.</canvas>
+  <canvas id="artboard" style="border:1px solid black;position:absolute;margin-left:18vw;">Your brower does not support HTML Canvas.</canvas>
   <div style="float:right;position:absolute;margin-left:90vw;">
 
   </div>
@@ -111,7 +112,7 @@
           Point 2:<br>
           <input type="number" id="line-linx" placeholder="X value">
           <input type="number" id="line-liny" placeholder="Y value"><br>
-          <input type="button" value="Draw" onclick="line()"><br>
+          <input type="button" value="Draw" onclick="line()">
           <input type="button" value="Cancel" onclick="document.getElementById('line-d').style.display = 'none'"><br>
         </fieldset>
       </form>
@@ -121,12 +122,12 @@
         <fieldset>
           <legend>Rectangle</legend>
           Point 1:<br>
-          <input type="number" id="rect-xin" placeholder="X value"><br>
+          <input type="number" id="rect-xin" placeholder="X value">
           <input type="number" id="rect-yin" placeholder="Y value"><br>
           Point 2:<br>
-          <input type="number" id="rectx" placeholder="X value"><br>
+          <input type="number" id="rectx" placeholder="X value">
           <input type="number" id="recty" placeholder="Y value"><br>
-          <input type="button" value="Draw" onclick="rect()"><br>
+          <input type="button" value="Draw" onclick="rect()">
           <input type="button" value="Cancel" onclick="document.getElementById('rect-d').style.display = 'none'"><br>
         </fieldset>
       </form>
@@ -135,11 +136,11 @@
       <form class="popupheader">
         <fieldset>
           <legend>Ellipse</legend>
-          <input type="number" id="circle-xin" placeholder="X value"><br>
+          <input type="number" id="circle-xin" placeholder="X value">
           <input type="number" id="circle-yin" placeholder="Y value"><br>
-          <input type="number" id="circle-radius" placeholder="Radius"><br>
+          <input type="number" style="width:11.75vw" id="circle-radius" placeholder="Radius"><br>
 
-          <input type="button" value="Draw" onclick="circle()"><br>
+          <input type="button" value="Draw" onclick="circle()">
           <input type="button" value="Cancel" onclick="document.getElementById('circle-d').style.display = 'none'"><br>
         </fieldset>
       </form>
@@ -148,11 +149,11 @@
       <form class="popupheader">
         <fieldset>
           <legend>Text</legend>
-          <input type="number" id="text-xin" placeholder="X value"><br>
-          <input type="number" id="text-yin" placeholder="Y value"><br>
+          <input type="number" id="text-xin" placeholder="X value">
+          <input type="number" id="text-yin" placeholder="Y value">
           <input type="number" id="text-size" placeholder="Text Size (px)"><br>
-          <input type="text" id="text-text" placeholder="Text String"><br>
-          <select id="text-font" name="selectFontFamily">
+          <input type="text" style="width:11.75vw" id="text-text" placeholder="Text String"><br>
+          <select id="text-font" style="width:12.25vw" name="selectFontFamily">
             <option> Serif </option>
             <option> Arial </option>
             <option> Sans-Serif </option>
@@ -160,12 +161,13 @@
             <option> Verdana </option>
             <option> Lucida Sans Unicode </option>
           </select>
-          <input type="button" value="Draw" onclick="text()"><br>
+          <input type="button" value="Draw" onclick="text()">
           <input type="button" value="Cancel" onclick="document.getElementById('text-d').style.display = 'none'"><br>
         </fieldset>
       </form>
     </div>
   </div>
+  <script src="startup.js"></script>
   <script src="PROGRAM.js"></script>
   <script src="export.js"></script>
   <script src="./renderer.js"></script>
