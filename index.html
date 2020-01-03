@@ -46,7 +46,8 @@
       color: white;
       margin:5px;
       margin-left:0px;
-      border:1px solid black;
+      border:0;
+      padding:4px;
     }
 
     button:active, input[type=button]:active{
@@ -55,8 +56,9 @@
       font-family: forma-djr-micro,sans-serif;
       font-weight: 400;
       font-style: normal;
-      border:1px solid black;
+      border:0;
       color: white;
+      padding:4px;
     }
 
     input[type=color]{
@@ -93,6 +95,7 @@
         <button onclick="document.getElementById('rect-d').style.display = 'inline-block'">🔲 &nbsp Rectangle</button><br>
         <button onclick="document.getElementById('circle-d').style.display = 'inline-block'">⭕ &nbsp Circle</button><br>
         <button onclick="document.getElementById('text-d').style.display = 'inline-block'">🔠 &nbsp Text</button><br>
+        <button onclick="document.getElementById('pic-d').style.display = 'inline-block'">🌄 &nbsp Picture</button><br>
       </fieldset>
 
   </div>
@@ -166,6 +169,23 @@
         </fieldset>
       </form>
     </div>
+    <div id="pic-d" class="popup-frame" draggable="true">
+      <form class="popupheader">
+        <fieldset>
+          <legend>Image</legend>
+          <input type="number" id="pic-xin" placeholder="X value">
+          <input type="number" id="pic-yin" placeholder="Y value"><br>
+          <input type="number" id="pic-width" placeholder="Picture Width">
+          <input type="file" id="pic-src" onchange="readURL(this);" placeholder="" style="width:10vw;"><br>
+          <input type="button" value="Draw" onclick="pic()">
+          <input type="button" value="Cancel" onclick="document.getElementById('pic-d').style.display = 'none'"><br>
+        </fieldset>
+        <fieldset>
+          <legend>Image Preview</legend>
+          <img id="tempimg" src="#" alt="Select an image to preview">
+        </fieldset>
+      </form>
+    </div>
   </div>
   <script src="startup.js"></script>
   <script src="PROGRAM.js"></script>
@@ -181,6 +201,23 @@
     $('.popup-frame').draggable({
     cancel: 'Input'
     });
+
+    //Temporary Image Displayer
+    function readURL(input) {
+       if (input.files && input.files[0]) {
+           var reader = new FileReader();
+
+           reader.onload = function (e) {
+               $('#tempimg')
+                   .attr('src', e.target.result)
+                   .width(175)
+                   //.height(200);
+           };
+
+           reader.readAsDataURL(input.files[0]);
+       }
+     }
+
   </script>
 </body>
 </html>

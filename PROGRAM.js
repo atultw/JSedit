@@ -69,7 +69,6 @@ function circle(){
   ctx.fill();
 }
 
-
 function text(){
   var xin = document.getElementById("text-xin").value;
   var yin = document.getElementById("text-yin").value;
@@ -88,4 +87,16 @@ function text(){
   ctx.fillStyle = fill_color;
   ctx.strokeText(text, xin, yin);
   ctx.fillText(text, xin, yin);
+}
+
+function pic(){
+  var xin = document.getElementById("pic-xin").value;
+  var yin = document.getElementById("pic-yin").value;
+  var picwidth = document.getElementById("pic-width").value;
+  var picsrc = document.getElementById("tempimg");
+  // DEBUG:
+  console.log(picsrc);
+  var artboard = document.getElementById("artboard");
+  var ctx = artboard.getContext("2d");
+  ctx.drawImage(picsrc, xin, yin);
 }
