@@ -9,7 +9,7 @@ function setdimensions(){
     artboard.setAttribute("width", width);
     artboard.setAttribute("height", height);
   } else {
-    console.log("operation canceled by user")
+    console.log("operation cancelled by user")
   }
 
 }
@@ -94,9 +94,17 @@ function pic(){
   var yin = document.getElementById("pic-yin").value;
   var picwidth = document.getElementById("pic-width").value;
   var picsrc = document.getElementById("tempimg");
-  // DEBUG:
-  console.log(picsrc);
+  var picOwidth = picsrc.style.width;
+  var npicOwidth = picOwidth.substring(0, picOwidth.length - 2);
+  console.log("npicOwidth " + npicOwidth);
+  var picOheight = picsrc.height;
+  console.log(picsrc.height);
+  var picheight = picwidth*(picOheight/npicOwidth);
+  console.log("picOheight " + picOheight);
+  console.log(picwidth);
+  console.log(picheight);
+
   var artboard = document.getElementById("artboard");
   var ctx = artboard.getContext("2d");
-  ctx.drawImage(picsrc, xin, yin);
+  ctx.drawImage(picsrc, xin, yin, picwidth, picheight);
 }
