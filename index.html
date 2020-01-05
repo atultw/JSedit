@@ -14,19 +14,21 @@
       font-family: forma-djr-micro,sans-serif;
       font-weight: 400;
       font-style: normal;
-      background:#6C7A89;
+      background:#696969;
       margin:0;
       padding:0.5vw;
     }
 
     canvas{
       background: #fff;
+      border-radius:5px;
     }
 
     .popup-frame{
       display:none;
       padding:20px;
-      border:1px solid black;
+      border:1px solid rgba(0,78,167,1);
+      border-radius:5px;
       width:15vw;
       position:absolute;
       background: #EEEEEE;
@@ -37,8 +39,15 @@
       margin:0.25vw;
     }
 
+    input{
+      border-radius:5px;
+      border:2px solid rgba(0,78,167,1);
+      font-family: Interstate-mono;
+      letter-spacing: -1px;
+    }
+
     button, input[type=button]{
-      border-radius: 1vw;
+      border-radius: 5px;
       background: linear-gradient(180deg, rgba(0,78,167,1) 0%, rgba(0,156,236,1) 100%);
       font-family: forma-djr-micro,sans-serif;
       font-weight: 400;
@@ -51,14 +60,7 @@
     }
 
     button:active, input[type=button]:active{
-      border-radius: 1vw;
       background: linear-gradient(180deg, rgba(0,156,236,1) 0%, rgba(0,78,167,1) 100%);
-      font-family: forma-djr-micro,sans-serif;
-      font-weight: 400;
-      font-style: normal;
-      border:0;
-      color: white;
-      padding:4px;
     }
 
     input[type=color]{
@@ -66,11 +68,16 @@
       padding:0;
       border:0;
     }
+
+    #hidden-area{
+      text-align:center;
+      margin-top:15%;
+    }
   </style>
 </head>
 
 <body>
-  <div style="position:absolute;width:15vw;padding:1vw;background: #EEEEEE;">
+  <div style="position:absolute;width:15vw;padding:1vw;background: #EEEEEE;border-radius:5px;">
 
       <fieldset>
         <legend>Universal Options</legend>
@@ -78,7 +85,7 @@
         <input type="color" id="stroke-color"><br>
         Fill Color:
         <input type="color" id="fill-color"><br>
-        <input style="width:100px" type="number" id="border-weight" placeholder="Line Thickness"><br>
+        <input style="width:11.75vw;" type="number" id="border-weight" placeholder="Line Thickness"><br>
         Artboard Settings:
         <input type="number" id="artboard-width" placeholder="Width">
         <input type="number" id="artboard-height" placeholder="Height">
@@ -87,7 +94,7 @@
       </fieldset>
 
   </div>
-  <div style="position:absolute;width:15vw;padding:1vw;background:#EEEEEE;margin-top:41vh;">
+  <div style="position:absolute;width:15vw;padding:1vw;background:#EEEEEE;margin-top:45vh;border-radius:5px;">
 
       <fieldset>
         <legend>Tools</legend>
@@ -99,12 +106,12 @@
       </fieldset>
 
   </div>
-  <canvas id="artboard" style="border:1px solid black;position:absolute;margin-left:18vw;">Your brower does not support HTML Canvas.</canvas>
+  <canvas id="artboard" style="border:1px solid rgba(0,78,167,1);position:absolute;margin-left:18vw;">Your brower does not support HTML Canvas.</canvas>
   <div style="float:right;position:absolute;margin-left:90vw;">
 
   </div>
   <br>
-  <div id="hidden-area" style="display:block;margin-top:410px;">
+  <div id="hidden-area" style="display:block;">
     <div id="line-d" class="popup-frame" draggable="true">
       <form class="popupheader">
         <fieldset>
@@ -176,7 +183,7 @@
           <input type="number" id="pic-xin" placeholder="X value">
           <input type="number" id="pic-yin" placeholder="Y value"><br>
           <input type="number" id="pic-width" placeholder="Picture Width">
-          <input type="file" id="pic-src" onchange="readURL(this);" placeholder="" style="width:10vw;"><br>
+          <input type="file" id="pic-src" onchange="readURL(this);" placeholder="" style="width:12vw;"><br>
           <input type="button" value="Draw" onclick="pic()">
           <input type="button" value="Cancel" onclick="document.getElementById('pic-d').style.display = 'none'"><br>
         </fieldset>
@@ -198,8 +205,17 @@
       $( ".popup-frame" ).draggable();
     } );
 
+
+
+    //Select menu fix:
     $('.popup-frame').draggable({
-    cancel: 'Input'
+      cancel: 'Select'
+      cancel: 'Input'
+    });
+
+    //input fields fix:
+    $('.popup-frame').draggable({
+      cancel: 'Input'
     });
 
     //Temporary Image Displayer
@@ -217,7 +233,6 @@
            reader.readAsDataURL(input.files[0]);
        }
      }
-
   </script>
 </body>
 </html>
